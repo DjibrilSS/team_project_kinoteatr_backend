@@ -6,10 +6,10 @@ const movieSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  genre: {
+  genre: [{
     type: mongoose.SchemaTypes.ObjectId,
     ref: "Genre",
-  },
+  }],
   year: Number,
   description: String,
 
