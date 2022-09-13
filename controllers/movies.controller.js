@@ -3,12 +3,14 @@ const Movie = require("../models/Movie.model");
 module.exports.moviesController = {
   addMovie: async (req, res) => {
     try {
-      const { image, title, genre, year, description, actors } = req.body;
+      const { image, title, genre, year, country, description, actors } =
+        req.body;
       const data = await Movie.create({
         image,
         title,
         genre,
         year,
+        country,
         description,
         actors,
       });
