@@ -22,7 +22,7 @@ module.exports.moviesController = {
 
   getMovies: async (req, res) => {
     try {
-      const data = await Movie.find().populate("genre");
+      const data = await Movie.find();
       res.json(data);
     } catch (e) {
       return res.status(400).json(e.toString());
