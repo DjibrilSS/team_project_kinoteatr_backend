@@ -6,11 +6,14 @@ const movieSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  genre: [{
-    type: mongoose.SchemaTypes.ObjectId,
-    ref: "Genre",
-  }],
+  genre: [
+    {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "Genre",
+    },
+  ],
   year: Number,
+  country: String,
   description: String,
 
   actors: [String],
