@@ -62,7 +62,8 @@ module.exports.usersController = {
   getUsersid: async (req, res) => {
     try {
       const data = await User.findById(req.user.id).populate("movies");
-      return res.json(data);
+
+       return  res.json([data]);
     } catch (e) {
       return res.status(400).json(e.toString());
     }

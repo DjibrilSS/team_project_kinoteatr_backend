@@ -15,6 +15,7 @@ const movieSchema = mongoose.Schema({
   year: Number,
   country: String,
   description: String,
+  price:Number,
 
   actors: [String],
 });
