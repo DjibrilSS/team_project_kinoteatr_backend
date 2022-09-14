@@ -24,7 +24,7 @@ module.exports.moviesController = {
   getMovies: async (req, res) => {
     try {
       const data = await Movie.find()//.populate({ path: "genre", select: "nameGenre -_id" });
-      res.json(data);
+      await res.json(data);
     } catch (e) {
       return res.status(400).json(e.toString());
     }
