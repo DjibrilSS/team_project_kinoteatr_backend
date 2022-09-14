@@ -5,14 +5,14 @@ const jwt = require("jsonwebtoken");
 module.exports.usersController = {
   addUser: async (req, res) => {
     try {
-      const { login, password } = req.body;
+      const { login, password, wallet, movies  } = req.body;
 
       const hash = await bcrypt.hash(
         password,
         Number(process.env.BCRYPT_ROUNDS)
       );
 
-      const user = await User.create({ login: login, password: hash });
+      const user = await User.create({ login: login, password: hash, wallet: wallet, movies: movies });
 
       res.json(user);
     } catch (e) {
@@ -39,13 +39,23 @@ module.exports.usersController = {
       const payload = {
         id: candidate._id,
       };
-      const token = await jwt.sign(payload, process.env.SECRET_JWT_KEY, {
+      const token = await jwt.sign(payload, String(process.env.SECRET_JWT_KEY), {
         expiresIn: "24h",
       });
 
-      res.json({token,id:payload.id});
+      res.json({token, id: payload.id});
     } catch (e) {
       res.json({ error: e });
     }
-}
+  },
+
+
+  getUsersid: async (req, res) => {
+    try {
+      const data = await User.findById(req.user.id).populate("movies");
+       return res.json(data);
+    } catch (e) {
+      return res.status(400).json(e.toString());
+    }
+  },
 }
