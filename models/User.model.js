@@ -2,11 +2,13 @@ const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema({
   password: String,
-  login: {
-    type: String,
-  },
-
- 
+  login: String,
+  wallet: Number,
+  movies: [{
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: 'Movie'
+  }]
+  
 });
 
 const User = mongoose.model("User", userSchema);
