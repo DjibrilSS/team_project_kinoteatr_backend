@@ -7,6 +7,10 @@ const userSchema = mongoose.Schema({
   movies: [{
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'Movie'
+  }],
+  buymovies: [{
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: 'Movie'
   }]
   
 });
