@@ -9,7 +9,8 @@ module.exports.commentControllers = {
         movie,
         user
     })
-    res.json(data);
+    const result = await data.populate("user")
+    res.json(result);
    } catch (error) {
     return res.status(400).json(error.toString())
    }

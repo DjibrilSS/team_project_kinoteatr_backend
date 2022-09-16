@@ -61,7 +61,7 @@ module.exports.usersController = {
 
   getUsersid: async (req, res) => {
     try {
-      const data = await User.findById(req.user.id).populate("movies");
+      const data = await User.findById(req.user.id).populate("movies buymovies");
 
       return res.json([data]);
     } catch (e) {
@@ -87,6 +87,17 @@ module.exports.usersController = {
 
     try {
       await user.updateOne({ $pull: { movies: movie._id } });
+      res.json({ movie, user });
+    } catch (error) {
+      res.json(error + "Ошибка");
+    }
+  },
+  buymovie: async (req, res) => {
+    const user = await User.findById(req.params.id);
+    const movie = await Movie.findById(req.body.movie);
+    try {
+      await user.updateOne({ $addToSet: { buymovies: movie._id } });
+
       res.json({ movie, user });
     } catch (error) {
       res.json(error + "Ошибка");
