@@ -15,6 +15,12 @@ const movieSchema = mongoose.Schema({
   year: Number,
   country: String,
   description: String,
+  rating: {
+    type: Number,
+    default: 0,
+  },
+  ratedUsers: [{ user: mongoose.SchemaTypes.ObjectId, rating: Number }],
+  buyUsers: [],
 
   actors: [String],
 });

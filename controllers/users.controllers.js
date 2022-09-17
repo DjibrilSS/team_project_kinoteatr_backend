@@ -1,4 +1,4 @@
-const User = require("../models/User.model")
+const User = require("../models/User.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -27,25 +27,29 @@ module.exports.usersController = {
       const candidate = await User.findOne({ login });
 
       if (!candidate) {
-        return res.status(401).json({error:"Неверный Логин"});
+        return res.status(401).json({ error: "Неверный Логин" });
         // return res.status(401).json({ error: "Неверный логин" });
       }
 
       const valid = await bcrypt.compare(password, candidate.password);
 
       if (!valid) {
-        return res.status(401).json({error:"Неверный пароль"});
+        return res.status(401).json({ error: "Неверный пароль" });
       }
       const payload = {
         id: candidate._id,
       };
-      const token = await jwt.sign(payload, process.env.SECRET_JWT_KEY, {
-        expiresIn: "24h",
-      });
+      const token = await jwt.sign(
+        payload,
+        String(process.env.SECRET_JWT_KEY),
+        {
+          expiresIn: "24h",
+        }
+      );
 
-      res.json({token,id:payload.id});
+      res.json({ token, id: payload.id });
     } catch (e) {
       res.json({ error: e });
     }
-}
-}
+  },
+};
