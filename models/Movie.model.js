@@ -21,7 +21,10 @@ const movieSchema = mongoose.Schema({
     default: 0,
   },
   ratedUsers: [{ user: mongoose.SchemaTypes.ObjectId, rating: Number }],
-  buyUsers: [],
+  buyUsers: [ {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "User",
+  }],
 
   actors: [String],
 });
