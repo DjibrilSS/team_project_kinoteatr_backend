@@ -96,6 +96,7 @@ module.exports.usersController = {
     const user = await User.findById(req.params.id);
     const movie = await Movie.findById(req.body.movie);
     try {
+      await user.updateOne({ $addToSet: { buymovies: movie._id } });
       await movie.updateOne({ $addToSet: { buyUsers: user._id } });
 
       res.json({ movie, user });
