@@ -80,7 +80,6 @@ module.exports.moviesController = {
         movie.ratedUsers = movie.ratedUsers.map((item) => {
           if (String(item.user) === id) {
             item.rating = rating;
-            console.log("as");
           }
           return item;
         });
@@ -89,10 +88,7 @@ module.exports.moviesController = {
           return acc + Number(element.rating);
         }, 0);
         await movie.updateOne({
-          rating: (
-            (sum + Number(rating)) /
-            (movie.ratedUsers.length + 1)
-          ).toFixed(1),
+          rating: (sum / movie.ratedUsers.length).toFixed(1),
         });
       }
 
