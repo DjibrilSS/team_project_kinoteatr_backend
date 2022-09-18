@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 
 const movieSchema = mongoose.Schema({
   image: String,
+  poster: String,
+  video: String,
   title: {
     type: String,
     required: true,
